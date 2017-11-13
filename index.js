@@ -84,12 +84,12 @@ class SafeView extends Component {
   render() {
     const { forceInset = false, isLandscape, children, style } = this.props;
 
-    if (Platform.OS !== 'ios') {
-      return <View style={style}>{this.props.children}</View>;
+    if (Platform.OS !== 'ios' || this.props.disabled) {
+      return <View pointerEvents={this.props.pointerEvents} style={style}>{this.props.children}</View>;
     }
 
     if (!forceInset && minor >= 50) {
-      return <SafeAreaView style={style}>{this.props.children}</SafeAreaView>;
+      return <SafeAreaView pointerEvents={this.props.pointerEvents} style={style}>{this.props.children}</SafeAreaView>;
     }
 
     const safeAreaStyle = this._getSafeAreaStyle();
@@ -107,7 +107,7 @@ class SafeView extends Component {
   }
 
   _onLayout = () => {
-    if (!this.view) return;
+    if (!this.view || this.props.disabled) return;
 
     const { isLandscape } = this.props;
     const { orientation } = this.state;
