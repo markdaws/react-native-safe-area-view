@@ -52,14 +52,14 @@ const isIPad = (() => {
 
 const statusBarHeight = isLandscape => {
   if (isIPhoneX) {
-    return isLandscape ? 0 : 44;
+    return isLandscape ? 20 : 44;
   }
 
   if (isIPad) {
     return 20;
   }
 
-  return isLandscape ? 0 : 20;
+  return isLandscape ? 20 : 20;
 };
 
 class SafeView extends Component {
